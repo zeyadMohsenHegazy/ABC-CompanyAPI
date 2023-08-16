@@ -1,13 +1,12 @@
 ﻿using ABC_CompanyAPI.BLL;
 using ABC_CompanyAPI.DAL;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ABC_CompanyAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CarController : Controller
+    public class CarController : ControllerBase
     {
         private readonly ICarRepository _carRepository;
         public CarController(ICarRepository carRepository)
@@ -31,35 +30,41 @@ namespace ABC_CompanyAPI.Controllers
         }
         #endregion
 
-
-        [HttpGet("{id:int}")]
-        public IActionResult GetCarById(int id)
+        [HttpGet("{carId}")]
+        public IActionResult GetCarById(int carId)
         {
-            if (ModelState.IsValid == true)
+            try
             {
-                //var Car = dbContext.Cars.Find(id);
-                return Ok();
+                var car = _carRepository.GetCarById(carId);
+                if (car == null)
+                {
+                    return NotFound($"Car with Id {carId} not found.");
+                }
+                return Ok(car);
             }
-            else
+            catch (Exception ex)
             {
-                return BadRequest("Car Not Exists !!!");
+                return BadRequest("An error occurred while retrieving the car.");
             }
-
         }
 
         [HttpPost]
-        public IActionResult AddCar(Car car)
+        public IActionResult AddCar([FromBody] Car car)
         {
-            if (ModelState.IsValid)
+            try
             {
-                //dbContext.Cars.Add(car);
-                //dbContext.SaveChanges();
-                return Ok("Added Successfully !");
+                _carRepository.AddCar(car);
+                return Ok("New Car Added");
             }
-            else
+            catch (Exception ex)
             {
-                return BadRequest("Not Added !!");
+                return BadRequest("An error occurred while Adding new car.");
             }
         }
+
+
+
+
+
     }
 }
