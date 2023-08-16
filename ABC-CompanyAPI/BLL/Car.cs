@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ABC_CompanyAPI.Models
+namespace ABC_CompanyAPI.BLL
 {
     public class Car
     {
         [Key]
-        public int CardId { get; set; }
+        public int CarId { get; set; }
 
         [Required]
         [MaxLength(20)]

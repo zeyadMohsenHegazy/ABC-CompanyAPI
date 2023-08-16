@@ -1,3 +1,7 @@
+using ABC_CompanyAPI.BLL;
+using ABC_CompanyAPI.DAL;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,6 +9,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//define Services for the Repositories
+builder.Services.AddScoped<ICarRepository, CarRepository>();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseLazyLoadingProxies().UseSqlServer("Data Source=.; Initial Catalog=ABC_Company; Integrated Security=true; TrustServerCertificate=true");
+});
 
 var app = builder.Build();
 
@@ -18,5 +30,6 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseCors(Policy => Policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 app.Run();
