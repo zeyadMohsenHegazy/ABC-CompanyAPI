@@ -8,8 +8,7 @@ namespace ABC_CompanyAPI.BLL
         [Key]
         public int CarBookingId { get; set; }
 
-        [Required]
-        public string RentDuration { get; set; }
+        public int RentDuration { get; set; }
 
         [ForeignKey("car")]
         public int CarId { get; set; }

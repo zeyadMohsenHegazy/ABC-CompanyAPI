@@ -13,6 +13,8 @@ builder.Services.AddSwaggerGen();
 //define Services for the Repositories
 builder.Services.AddScoped<ICarRepository, CarRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IBookingRepository, BookingRepository>();
+builder.Services.AddScoped<ICarBookings, CarBookingRepository>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {

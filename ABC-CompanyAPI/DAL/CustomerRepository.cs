@@ -16,5 +16,11 @@ namespace ABC_CompanyAPI.DAL
             _dbContext.Customers.Add(customer);
             _dbContext.SaveChanges();
         }
+
+        public Customer GetCustomer(string name)
+        {
+            var customer = _dbContext.Customers.FirstOrDefault(z => z.CustomerName == name);
+            return customer;
+        }
     }
 }

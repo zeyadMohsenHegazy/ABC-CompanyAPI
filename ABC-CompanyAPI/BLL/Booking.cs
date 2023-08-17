@@ -7,7 +7,7 @@ namespace ABC_CompanyAPI.BLL
     {
         [Key]
         public int BookingId { get; set; }
-        public DateTime TransactionDate { get; set; }
+        public DateTime TransactionDate { get; set; } 
         public string AdvancedPayment { get; set; }
 
         [ForeignKey("customer")]

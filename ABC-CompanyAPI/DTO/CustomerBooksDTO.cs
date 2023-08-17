@@ -1,16 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ABC_CompanyAPI.BLL
+namespace ABC_CompanyAPI.DTO
 {
-    public class Customer
+    public class CustomerBooksDTO
     {
-        [Key]
-        public int CustomerId { get; set; }
-
         public string CustomerName { get; set; }
-
         public string Nationality { get; set; }
-
         public string DrivingLicenseNum { get; set; }
+        public DateTime TransactionDate { get; set; }
+        public string AdvancedPayment { get; set; }
     }
 }
